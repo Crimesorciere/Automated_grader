@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photosynthesis Prediction</title>
+</head>
+<body>
+    <h1>Photosynthesis Prediction</h1>
+    <form id="prediction-form">
+        <label for="answer">Enter your answer:</label><br>
+        <input type="text" id="answer" name="answer"><br><br>
+        <button type="submit">Predict</button>
+    </form>
+    <div id = "score"></div>
+    <div id="prediction-result"></div>
+
+    <script>
+        document.getElementById("prediction-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            const formData = new FormData(this);
+            const answer = formData.get("answer");
+
+            fetch(`http://localhost:8000/predict_photosynthesis/
+?answer=${encodeURIComponent(answer)}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.score);
+                document.getElementById("score").innerText = `Predicted Score: ${data.score}`;
+                document.getElementById("prediction-result").style.display = "block";
+            })
+            .catch(error => {
+                // console.error("Error:", error);
+                alert("An error occurred while processing the request.");
+            });
+        });
+    </script>
+</body>
+</html>
