@@ -1,0 +1,12 @@
+How to run it?
+
+Download docker from browser
+link : https://docs.docker.com/desktop/install/windows-install/
+
+run in terminal
+ 1.  docker build -t image_name . 
+ 2. docker run -p 8000:8000 --name container_name image_name
+
+After the server starts running, run the index.html file 
+
+reference video : https://www.youtube.com/watch?v=vA0C0k72-b4
